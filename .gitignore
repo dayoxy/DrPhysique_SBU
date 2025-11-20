@@ -581,3 +581,54 @@ logs/
 *.tmp
 *.temp
 
+
+# Backend specific
+/Backend/venv/
+/Backend/__pycache__/
+/Backend/*.db
+/Backend/*.sqlite3
+/Backend/*.db-journal
+/Backend/.env
+/Backend/.env.*
+
+# Database files
+*.db
+*.sqlite3
+
+# Virtual environment
+venv/
+env/
+ENV/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Logs
+*.log
+logs/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
