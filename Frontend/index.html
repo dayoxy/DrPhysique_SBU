@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>DrPhysique</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Combined minimal styles from login + admin/staff pages */
+    :root{--primary:#2c7db7;--secondary:#63aae2;--dark:#2d3436;}
+    body{font-family:'Segoe UI',sans-serif;background:#f0f2f5;margin:0;padding:0;color:var(--dark);} 
+    header{background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;padding:1rem;}
+    .container{max-width:1200px;margin:0 auto;padding:0 15px;}
+    nav a{color:#fff;margin-right:12px;text-decoration:none}
+    .view{display:none;padding:20px}
+    .view.active{display:block}
+    /* login box */
+    .login-box{background:#fff;padding:2rem;border-radius:10px;box-shadow:0 5px 15px rgba(0,0,0,0.1);width:320px;margin:60px auto}
+    .login-box h2{text-align:center;margin-bottom:20px;color:var(--primary);} 
+    .form-group{margin-bottom:15px}
+    input,select{width:100%;padding:10px;border:1px solid #ddd;border-radius:5px;font-size:1rem}
+    .btn{padding:10px 15px;background:var(--primary);color:#fff;border:none;border-radius:5px;cursor:pointer}
+    /* dashboard layout */
+    .main-content{display:flex;margin-top:20px}
+    .sidebar{width:250px;background:#fff;border-radius:8px;padding:1rem;margin-right:20px}
+    .content{flex:1}
+    .card{background:#fff;border-radius:8px;padding:1.5rem;margin-bottom:20px}
+    @media(max-width:768px){.main-content{flex-direction:column}.sidebar{width:100%;margin-right:0;margin-bottom:20px}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div style="display:flex;align-items:center"><i class="fas fa-hospital" style="font-size:24px;margin-right:8px"></i><strong>DrPhysique</strong></div>
+        <div>
+          <a href="#/login" id="nav-login">Login</a>
+          <a href="#/staff" id="nav-staff" style="display:none">Staff</a>
+          <a href="#/admin" id="nav-admin" style="display:none">Admin</a>
+          <button id="logoutBtn" style="display:none;margin-left:8px" class="btn">Logout</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Login view -->
+    <section id="view-login" class="view">
+      <div class="login-box">
+        <h2>Sign In</h2>
+        <div id="loginError" style="color:#e74c3c;margin-bottom:10px"></div>
+        <form id="loginForm">
+          <div class="form-group"><label>Username</label><input name="username" id="login-username" required></div>
+          <div class="form-group"><label>Password</label><input type="password" name="password" id="login-password" required></div>
+          <button class="btn" type="submit">Sign in</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Staff view -->
+    <section id="view-staff" class="view">
+      <div class="main-content">
+        <aside class="sidebar">
+          <ul id="sbu-list"></ul>
+        </aside>
+        <div class="content">
+          <div class="card"><h3 id="staff-name">Staff Dashboard</h3></div>
+          <div class="card">
+            <h4>Submit Sale</h4>
+            <form id="sales-form">
+              <div class="form-group"><label for="sbu">SBU</label><select id="sbu" required></select></div>
+              <div class="form-group"><label for="sales-amount">Amount</label><input id="sales-amount" type="number" step="0.01" required></div>
+              <div class="form-group"><label for="sales-day">Day</label><input id="sales-day" type="number" value="1" required></div>
+              <button class="btn" type="submit">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Admin view -->
+    <section id="view-admin" class="view">
+      <div class="main-content">
+        <aside class="sidebar">
+          <ul>
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Employees</a></li>
+            <li><a href="#">SBUs</a></li>
+          </ul>
+        </aside>
+        <div class="content">
+          <div class="card"><h3 id="admin-name">Admin Dashboard</h3></div>
+          <div class="card">
+            <h4>Create Employee</h4>
+            <form id="create-employee-form">
+              <div class="form-group"><label>Username</label><input id="new-username" required></div>
+              <div class="form-group"><label>Password</label><input id="new-password" type="password" required></div>
+              <div class="form-group"><label>Role</label><select id="new-role"><option value="staff">Staff</option><option value="admin">Admin</option></select></div>
+              <button class="btn" type="submit">Create</button>
+            </form>
+          </div>
+          <div class="card">
+            <h4>Currency Rates</h4>
+            <form id="currency-form">
+              <div class="form-group"><label>Sales Rate</label><input id="sales-rate" type="number" step="0.01" value="1"></div>
+              <div class="form-group"><label>Expense Rate</label><input id="expense-rate" type="number" step="0.01" value="1"></div>
+              <div class="form-group"><label>Budget Rate</label><input id="budget-rate" type="number" step="0.01" value="1"></div>
+              <button class="btn" type="submit">Update</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

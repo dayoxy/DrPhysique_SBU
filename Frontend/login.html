@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DoctorPhysique - Login</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root {
+    --primary: #2c7db7;
+    --secondary: #63aae2;
+    --success: #27ae60;
+    --danger: #e74c3c;
+    --dark: #2d3436;
+    --light: #f8f9fa;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.login-container {
+    display: flex;
+    max-width: 1000px;
+    width: 100%;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    overflow: hidden;
+    min-height: 600px;
+}
+
+.login-left {
+    flex: 1;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.login-left::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+}
+
+.brand {
+    position: relative;
+    z-index: 2;
+    margin-bottom: 30px;
+}
+
+.brand h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.brand p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+.features {
+    position: relative;
+    z-index: 2;
+    margin-top: 40px;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    font-size: 1rem;
+}
+
+.feature-item i {
+    background: rgba(255,255,255,0.2);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    font-size: 1.2rem;
+}
+
+.login-right {
+    flex: 1;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: white;
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.login-header h2 {
+    color: var(--dark);
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.login-header p {
+    color: #666;
+    font-size: 1rem;
+}
+
+.login-box {
+    width: 100%;
+}
+
+.form-group {
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--dark);
+    font-size: 0.95rem;
+}
+
+.input-with-icon {
+    position: relative;
+}
+
+.input-with-icon i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+    font-size: 1.1rem;
+}
+
+.input-with-icon input {
+    width: 100%;
+    padding: 15px 15px 15px 45px;
+    border: 2px solid #e1e5e9;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: var(--light);
+}
+
+.input-with-icon input:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: white;
+    box-shadow: 0 0 0 3px rgba(44, 125, 183, 0.1);
+}
+
+/* Password toggle styling */
+.password-container {
+    position: relative;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 5px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.password-toggle:hover {
+    color: var(--primary);
+    background: rgba(0,0,0,0.05);
+}
+
+/* Ensure input has enough padding for the toggle */
+.password-container input {
+    padding-right: 45px !important;
+}
+
+.password-strength {
+    margin-top: 8px;
+}
+
+.strength-bar {
+    height: 6px;
+    background: #e1e5e9;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+
+.strength-fill {
+    height: 100%;
+    width: 0%;
+    transition: all 0.3s ease;
+    border-radius: 3px;
+}
+
+.strength-text {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.btn {
+    width: 100%;
+    padding: 15px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+.btn:hover {
+    background: var(--secondary);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(44, 125, 183, 0.3);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.alert {
+    background: #fee;
+    color: var(--danger);
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border-left: 4px solid var(--danger);
+    display: none;
+}
+
+.alert.show {
+    display: block;
+}
+
+.quick-actions {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.role-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.btn-role {
+    flex: 1;
+    padding: 12px;
+    background: var(--light);
+    border: 2px solid #e1e5e9;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.btn-role:hover {
+    border-color: var(--primary);
+    background: white;
+}
+
+.btn-role.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.divider {
+    text-align: center;
+    margin: 25px 0;
+    color: #666;
+    position: relative;
+}
+
+.divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #e1e5e9;
+}
+
+.divider span {
+    background: white;
+    padding: 0 15px;
+    position: relative;
+}
+
+.system-info {
+    margin-top: 30px;
+    padding: 20px;
+    background: var(--light);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.system-info h4 {
+    color: var(--primary);
+    margin-bottom: 10px;
+}
+
+.system-info p {
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+    .login-container {
+        flex-direction: column;
+        max-width: 400px;
+    }
+    
+    .login-left {
+        padding: 30px;
+        text-align: center;
+    }
+    
+    .login-right {
+        padding: 30px;
+    }
+    
+    .role-buttons {
+        flex-direction: column;
+    }
+    
+    .brand h1 {
+        font-size: 2rem;
+        justify-content: center;
+    }
+}
+</style>
+</head>
+<body>
+<div class="login-container">
+    <!-- Left Side - Branding & Features -->
+    <div class="login-left">
+        <div class="brand">
+            <h1><i class="fas fa-hospital"></i> DoctorPhysique</h1>
+            <p>Strategic Business Unit Management System</p>
+        </div>
+        <div class="features">
+            <div class="feature-item">
+                <i class="fas fa-chart-line"></i>
+                <span>Real-time Performance Analytics</span>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-shield-alt"></i>
+                <span>Secure Role-based Access</span>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-file-invoice-dollar"></i>
+                <span>Comprehensive Financial Reporting</span>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-users-cog"></i>
+                <span>Advanced User Management</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Side - Login Form -->
+    <div class="login-right">
+        <div class="login-header">
+            <h2>Welcome Back</h2>
+            <p>Sign in to your account</p>
+        </div>
+
+        <div class="login-box">
+            <div id="alert" class="alert"></div>
+            
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="username" placeholder="Enter your username" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-with-icon password-container">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" placeholder="Enter your password" required>
+                        <button type="button" class="password-toggle">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <div class="password-strength">
+                        <div class="strength-bar">
+                            <div id="pw-bar" class="strength-fill"></div>
+                        </div>
+                        <div id="pw-text" class="strength-text">Password strength</div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn">
+                    <i class="fas fa-sign-in-alt"></i> Sign In
+                </button>
+            </form>
+
+            <div class="divider">
+                <span>Select your role</span>
+            </div>
+
+            <div class="quick-actions">
+                <div class="role-buttons">
+                    <button type="button" class="btn-role active" data-role="staff">
+                        <i class="fas fa-user-tie"></i> Staff Login
+                    </button>
+                    <button type="button" class="btn-role" data-role="admin">
+                        <i class="fas fa-user-shield"></i> Admin Login
+                    </button>
+                </div>
+            </div>
+
+            <div class="system-info">
+                <h4><i class="fas fa-info-circle"></i> System Access</h4>
+                <p>Contact your system administrator if you need account credentials or encounter any login issues.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Enhanced login functionality with password toggle and security
+document.addEventListener('DOMContentLoaded', function() {
+    const loginForm = document.getElementById('login-form');
+    const alertDiv = document.getElementById('alert');
+    const roleButtons = document.querySelectorAll('.btn-role');
+    let currentRole = 'staff';
+
+    // Password toggle functionality
+    function setupPasswordToggle() {
+        const passwordToggle = document.querySelector('.password-toggle');
+        if (passwordToggle) {
+            passwordToggle.addEventListener('click', function() {
+                togglePasswordVisibility();
+            });
+        }
+    }
+
+    function togglePasswordVisibility() {
+        const passwordInput = document.getElementById('password');
+        const toggleIcon = document.querySelector('.password-toggle i');
+        
+        if (!passwordInput || !toggleIcon) return;
+        
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            toggleIcon.className = 'fas fa-eye-slash';
+        } else {
+            passwordInput.type = 'password';
+            toggleIcon.className = 'fas fa-eye';
+        }
+    }
+
+    // Role selection
+    roleButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            roleButtons.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            currentRole = this.getAttribute('data-role');
+            
+            // Update form placeholder based on role
+            const usernameInput = document.getElementById('username');
+            usernameInput.placeholder = `Enter ${currentRole} username`;
+        });
+    });
+
+    // Login form submission
+    loginForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value;
+
+        if (!username || !password) {
+            showAlert('Please enter both username and password');
+            return;
+        }
+
+        // Show loading state
+        const submitBtn = loginForm.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing In...';
+        submitBtn.disabled = true;
+
+        try {
+            const res = await fetch('http://127.0.0.1:8000/token', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`
+            });
+
+            if (res.ok) {
+                const data = await res.json();
+                localStorage.setItem('token', data.access_token);
+                
+                // Get user role from token
+                const token = data.access_token;
+                const payload = JSON.parse(atob(token.split('.')[1]));
+                const userRole = payload.role;
+                
+                // SECURITY FIX: Verify the selected role matches the actual role
+                if ((currentRole === 'admin' && userRole !== 'admin') || 
+                    (currentRole === 'staff' && userRole !== 'staff')) {
+                    showAlert(`Access denied. You are logged in as ${userRole}, but selected ${currentRole} role.`);
+                    localStorage.removeItem('token');
+                    return;
+                }
+                
+                // Redirect based on actual role from token
+                if (userRole === 'admin') {
+                    window.location.href = 'admin.html';
+                } else {
+                    window.location.href = 'staff.html';
+                }
+            } else {
+                const err = await res.json();
+                showAlert(err.detail || 'Login failed. Please check your credentials.');
+            }
+        } catch (error) {
+            showAlert('Network error. Please try again.');
+        } finally {
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+        }
+    });
+
+    // Password strength indicator
+    document.getElementById('password').addEventListener('input', function(e) {
+        updatePasswordStrength(e.target.value);
+    });
+
+    function updatePasswordStrength(password) {
+        const bar = document.getElementById('pw-bar');
+        const text = document.getElementById('pw-text');
+        
+        if (!password) {
+            bar.style.width = '0%';
+            bar.style.background = '#e1e5e9';
+            text.textContent = 'Password strength';
+            return;
+        }
+
+        let score = 0;
+        if (password.length >= 8) score++;
+        if (/[0-9]/.test(password)) score++;
+        if (/[A-Z]/.test(password)) score++;
+        if (/[^A-Za-z0-9]/.test(password)) score++;
+
+        const percentage = (score / 4) * 100;
+        bar.style.width = percentage + '%';
+
+        if (percentage < 50) {
+            bar.style.background = '#e74c3c';
+            text.textContent = 'Weak password';
+        } else if (percentage < 75) {
+            bar.style.background = '#f39c12';
+            text.textContent = 'Good password';
+        } else {
+            bar.style.background = '#27ae60';
+            text.textContent = 'Strong password';
+        }
+    }
+
+    function showAlert(message) {
+        alertDiv.textContent = message;
+        alertDiv.classList.add('show');
+        setTimeout(() => {
+            alertDiv.classList.remove('show');
+        }, 5000);
+    }
+
+    // Initialize password toggle
+    setupPasswordToggle();
+});
+</script>
+</body>
+</html>
